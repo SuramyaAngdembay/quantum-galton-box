@@ -83,7 +83,7 @@ Recommended Python version: **3.10+**
 
 ## References
 
-- [Quantum Galton Board Paper (PDF)](./galton_board.pdf)
+- [Quantum Galton Board Paper (PDF)](https://arxiv.org/pdf/2202.01735)
 - Qiskit Documentation: https://qiskit.org/documentation/
 - [Scipy binomial](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binom.html)
 
