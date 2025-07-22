@@ -19,12 +19,11 @@ galton_box_monte_carlo/
 
 This project is an implementation of the concepts from:
 
-> **Quantum Galton Boards and Monte Carlo Sampling**  
-> *by Aram W. Harrow, Ashley Montanaro, and others*
+> **Universal Statistical Simulator**  
+> *by Mark Carney, and Ben Varcoe*
+[arXiv:2202.01735](https://arxiv.org/pdf/2202.01735)
 
-The paper explores how quantum walks can be used to simulate statistical distributions (e.g., binomial, exponential) using quantum circuits — with applications to high-dimensional sampling and Monte Carlo methods.
-
-We recreate the quantum Galton board structure and demonstrate how different gate patterns result in different output distributions, leveraging quantum interference and measurement collapse.
+The paper introduces a universal framework to simulate classical probability distributions using quantum circuits. The method is based on a Galton board analogy, where a quantum particle undergoes a discrete-time walk across multiple layers of beam splitters, simulated using Hadamard gates and controlled swaps. By manipulating quantum interference and measurement, the circuit can reproduce various statistical distributions including binomial, exponential, and more.
 
 ---
 
