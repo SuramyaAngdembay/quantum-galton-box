@@ -31,7 +31,7 @@ def multi_swap(qc, start, curr, count):
         n += 1
     return qc
 
-def galton_board_circuit(n):
+def galton_board_circuit(n, bias=False, theta=np.pi/2):
     qbits = num_of_qbits(n)
     start = qbits // 2
     qc = QuantumCircuit(qbits, n+1)
@@ -39,7 +39,10 @@ def galton_board_circuit(n):
     curr = start
     count = 1
     while curr != 1:
-        qc.h(0)
+        if bias == True :
+            qc.rx(theta,0)
+        else:
+            qc.h(0)
         if count < 2:
             qc = one_peg(qc, curr)
         else:
