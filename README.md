@@ -49,11 +49,12 @@ For a circuit diagram display, check out peg.ipynb .
 ## Example Output
 
 ```bash
-MSE: 0.000107
-Empirical mean: 0.200, variance: 0.015
-Expected mean: 0.200, variance: 0.015
+Galton Box level: 3; pegs: 6
+MSE: 0.000879
+Empirical mean: 0.250, variance: 0.013
+Expected mean: 0.250, variance: 0.016
 ---------------------------------------------------------------------------------
-Empirical data: {0.06620553359683795, 0.2554347826086957, 0.3759881422924901, 0.2425889328063241, 0.059782608695652176]
+Empirical data: {0.11956521739130435, 0.3705533596837945, 0.3601778656126482, 0.14970355731225296]
 ```
 
 ---
