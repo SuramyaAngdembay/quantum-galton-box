@@ -1,0 +1,207 @@
+{
+  "config": {
+    "target": "exponential",
+    "steps": 4,
+    "shots": 8192,
+    "seeds": 8,
+    "opt_level": 2,
+    "noise": "synthetic",
+    "endianness": "as_is",
+    "lambda": 0.7,
+    "target_offset_final": 1
+  },
+  "metrics_mean_std": {
+    "tvd_noisy_clean_full": [
+      0.23142454164978074,
+      0.008661004554660583
+    ],
+    "hellinger_noisy_clean": [
+      0.25123629563872124,
+      0.008831822746149024
+    ],
+    "tvd_clean_target_full": [
+      0.19103326473352836,
+      0.0
+    ],
+    "tvd_noisy_target_full": [
+      0.0851696015777816,
+      0.004623823106382173
+    ],
+    "kl_clean_target_full": [
+      0.17215561965931148,
+      2.681525970491482e-05
+    ],
+    "kl_noisy_target_full": [
+      -0.006419656831027454,
+      0.004588751409831921
+    ],
+    "leakage_clean": [
+      0.0,
+      0.0
+    ],
+    "leakage_noisy": [
+      0.026332873641882703,
+      0.0023901405154453177
+    ],
+    "integrity_noisy": [
+      0.420257568359375,
+      0.003958623464367913
+    ]
+  },
+  "positions": [
+    -9,
+    -7,
+    -5,
+    -3,
+    -1,
+    1,
+    3,
+    5,
+    7,
+    9
+  ],
+  "probs_mean": {
+    "clean_full": [
+      0.0,
+      0.7067108154296875,
+      0.0,
+      0.2611846923828125,
+      0.0,
+      0.0306396484375,
+      0.0,
+      0.00146484375,
+      0.0,
+      0.0
+    ],
+    "noisy_full": [
+      0.0,
+      0.47528627377990673,
+      0.004614938308486035,
+      0.31660911953036813,
+      0.004393412769552647,
+      0.1227262321850091,
+      0.004066024705284447,
+      0.04821801359161837,
+      0.013258497858559575,
+      0.010827487271214927
+    ],
+    "target_full": [
+      0.0,
+      0.5190898514845024,
+      0.0,
+      0.2577723915944693,
+      0.0,
+      0.1280059813889777,
+      0.0,
+      0.06356588915516302,
+      0.0,
+      0.03156588637688769
+    ]
+  },
+  "per_seed": [
+    {
+      "seed": 0,
+      "offset": 1,
+      "tvd_noisy_clean_full": 0.23604149382374634,
+      "hellinger_noisy_clean": 0.25684065402473566,
+      "tvd_clean_target_full": 0.19103326473352836,
+      "tvd_noisy_target_full": 0.08618041076541277,
+      "kl_clean_target_full": 0.17210609372859242,
+      "kl_noisy_target_full": -0.010705044039868538,
+      "leakage_clean": 0.0,
+      "leakage_noisy": 0.028613569321533923,
+      "integrity_noisy": 0.413818359375
+    },
+    {
+      "seed": 1,
+      "offset": 1,
+      "tvd_noisy_clean_full": 0.22141344854775158,
+      "hellinger_noisy_clean": 0.23839553739954858,
+      "tvd_clean_target_full": 0.19103326473352836,
+      "tvd_noisy_target_full": 0.08751390106024445,
+      "kl_clean_target_full": 0.17214208417682383,
+      "kl_noisy_target_full": 0.0008435619796774551,
+      "leakage_clean": 0.0,
+      "leakage_noisy": 0.024291497975708502,
+      "integrity_noisy": 0.422119140625
+    },
+    {
+      "seed": 2,
+      "offset": 1,
+      "tvd_noisy_clean_full": 0.24163081456570834,
+      "hellinger_noisy_clean": 0.260083843615438,
+      "tvd_clean_target_full": 0.19103326473352836,
+      "tvd_noisy_target_full": 0.08808364511330247,
+      "kl_clean_target_full": 0.17217815275385698,
+      "kl_noisy_target_full": -0.008660200899414005,
+      "leakage_clean": 0.0,
+      "leakage_noisy": 0.027817608259248637,
+      "integrity_noisy": 0.4256591796875
+    },
+    {
+      "seed": 3,
+      "offset": 1,
+      "tvd_noisy_clean_full": 0.24398687504576744,
+      "hellinger_noisy_clean": 0.26488833193045586,
+      "tvd_clean_target_full": 0.19103326473352836,
+      "tvd_noisy_target_full": 0.08874196107102576,
+      "kl_clean_target_full": 0.17217815275385698,
+      "kl_noisy_target_full": -0.012002700716839607,
+      "leakage_clean": 0.0,
+      "leakage_noisy": 0.029291154071470416,
+      "integrity_noisy": 0.416748046875
+    },
+    {
+      "seed": 4,
+      "offset": 1,
+      "tvd_noisy_clean_full": 0.22778334453283378,
+      "hellinger_noisy_clean": 0.24378836384114067,
+      "tvd_clean_target_full": 0.19103326473352836,
+      "tvd_noisy_target_full": 0.0851178487762229,
+      "kl_clean_target_full": 0.17217815275385698,
+      "kl_noisy_target_full": -0.000509280402140027,
+      "leakage_clean": 0.0,
+      "leakage_noisy": 0.023168259484506223,
+      "integrity_noisy": 0.4215087890625
+    },
+    {
+      "seed": 5,
+      "offset": 1,
+      "tvd_noisy_clean_full": 0.23254823349677986,
+      "hellinger_noisy_clean": 0.25066375735533963,
+      "tvd_clean_target_full": 0.19103326473352836,
+      "tvd_noisy_target_full": 0.08795360372168998,
+      "kl_clean_target_full": 0.17217815275385698,
+      "kl_noisy_target_full": -0.0061996472456169165,
+      "leakage_clean": 0.0,
+      "leakage_noisy": 0.026932084309133488,
+      "integrity_noisy": 0.4169921875
+    },
+    {
+      "seed": 6,
+      "offset": 1,
+      "tvd_noisy_clean_full": 0.22688456534788418,
+      "hellinger_noisy_clean": 0.24884550792045768,
+      "tvd_clean_target_full": 0.19103326473352836,
+      "tvd_noisy_target_full": 0.08307105150200676,
+      "kl_clean_target_full": 0.17214208417682383,
+      "kl_noisy_target_full": -0.00852502981199139,
+      "leakage_clean": 0.0,
+      "leakage_noisy": 0.02715193529751589,
+      "integrity_noisy": 0.422607421875
+    },
+    {
+      "seed": 7,
+      "offset": 1,
+      "tvd_noisy_clean_full": 0.22110755783777442,
+      "hellinger_noisy_clean": 0.24638436902265387,
+      "tvd_clean_target_full": 0.19103326473352836,
+      "tvd_noisy_target_full": 0.07469439061234764,
+      "kl_clean_target_full": 0.17214208417682383,
+      "kl_noisy_target_full": -0.005598913512026602,
+      "leakage_clean": 0.0,
+      "leakage_noisy": 0.02339688041594454,
+      "integrity_noisy": 0.422607421875
+    }
+  ]
+}

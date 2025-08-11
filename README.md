@@ -1,100 +1,41 @@
-## 📁 Project Structure
+Project: Quantum Galton Board as a Universal Statistical Simulator
+Team: Gorkhalis
+Members (WISER IDs): <Prajwal – gst-9ZHH1Kj14wFrIIO> · <Suramya – gst-wYBMQBj2KrRSykZ> · <Name – ID>
+Program: WISER 2025 Quantum Projects
 
-```
-galton_box_monte_carlo/
-├── src/
-│   └── galton.py          # Core circuit builder and statistical tools
-├── examples/
-│   └── run_galton.py      # Main script to build, run, and evaluate the circuit
-├── notebooks/
-│   └── peg.ipynb          # Exploratory notebook
-├── .gitignore
-├── README.md
-└── requirements.txt
-```
+Summary (≈500 words)
+We implement a Quantum Galton Board (QGB) that maps a Galton box to a quantum circuit so a single circuit pass creates a superposition of all trajectories and samples a target distribution. This is a compact, intuitive playground for Monte-Carlo-style simulation on quantum hardware and a clean testbed for noise and mitigation in the NISQ era—relevant to transport, finance, and uncertainty quantification. (Project scope per brief: general n-layer circuit; additional targets—exponential and Hadamard; noisy simulations; and distance metrics.) Project details
 
----
+Objectives. (1) Generalize the QGB to n layers; (2) reproduce three targets—Hadamard walk, classical/binomial, and exponential; (3) build a robust benchmarking harness to compare noiseless vs. noisy runs with standardized post-processing and metrics (TVD, KL, Hellinger), plus leakage (mass off support) and integrity (fraction of one-hot strings).
 
-## Background
+Circuit design. We use a modular peg/shift construction closely following the reference QASM: prepare the coin, then apply controlled-SWAPs to realize left/right motion, repeated level-by-level. Our first pass showed a subtle right-bias; we fixed it by removing any CX(position→coin) and using proper control-on-0 branching, then consolidated into a symmetric “H-then-shift” step each level. We standardized endianness so '…001' is the rightmost bar and always measure only the position register. 
 
-This project is an implementation of the concepts from:
+Targets.
+• Hadamard walk (n=4): a fixed 5-bin analytic distribution embedded on the 10-slot full grid (zeros in between bins).
+• Classical/binomial: verification target using ${n \choose k} / 2^n$
 
-> **Universal Statistical Simulator**  
-> *by Mark Carney, and Ben Varcoe*
-[arXiv:2202.01735](https://arxiv.org/pdf/2202.01735)
+• Exponential: per-peg Rx(θ) biasing per as depth = level / total layers
+ theta = arcsin(sqrt(1/(lam*n*depth))), n=total pegs given by triangle number 
 
-The paper introduces a universal framework to simulate classical probability distributions using quantum circuits. The method is based on a Galton board analogy, where a quantum particle undergoes a discrete-time walk across multiple layers of beam splitters, simulated using Hadamard gates and controlled swaps. By manipulating quantum interference and measurement, the circuit can reproduce various statistical distributions including binomial, exponential, and more.
 
----
+Benchmarking. Our benchmark.py always post-processes to the full grid (raw bitstring length 
+𝐿
+L), embeds the analytic target onto that grid with zeros on “forbidden” slots, and chooses offset parity by best match to the clean run. We report: TVD(noisy,clean), TVD/KL vs target, Hellinger(noisy,clean), plus leakage and integrity. This makes apples-to-apples comparisons across targets and seeds straightforward.
 
-## Usage
+Representative baseline (n=4, seeds=8).
 
-### Running the Simulation
+Hadamard: clean vs analytic TVD ≈ 0.0086; noisy vs clean TVD ≈ 0.2525; leakage_noisy ≈ 0.1657; integrity_noisy ≈ 0.3845.
 
-```bash
-cd galton_box_monte_carlo
-python examples/run_galton.py
-```
+Exponential (λ≈0.7): clean vs analytic TVD ≈ 0.1910; noisy vs clean TVD ≈ 0.2314; leakage_noisy ≈ 0.0263; integrity_noisy ≈ 0.4202.
 
-This builds and executes a multi-layer Galton board and prints out:
+Binomial: clean vs analytic TVD ≈ 0.0046; noisy vs clean TVD ≈ 0.1943; leakage_noisy ≈ 0.1864; integrity_noisy ≈ 0.3590.
+(We include JSON + PNG overlays for each run in results_fullgrid/.)
 
-- Measurement counts
-- Empirical vs expected statistics
-- Mean squared error against binomial model
+Impact.
 
-For a circuit diagram display, check out peg.ipynb . 
+A reference-quality, symmetric QGB step that others can reuse; 2) a target-agnostic benchmarking harness with leakage/integrity, enabling measurable progress on noise optimization; 3) a clear path from circuits → distributions for Monte-Carlo tasks.
 
----
+Future scope. Optimize noisy accuracy and depth: smarter CSWAP decompositions and layout, dynamical decoupling, readout mitigation, transpiler tuning; per-layer θ-calibration for exponential; and (time permitting) MCMR/RUS to discard corrupted shots. 2202.01735v1
 
-## Example Output
-
-```bash
-Galton Box level: 3; pegs: 6
-MSE: 0.000879
-Empirical mean: 0.250, variance: 0.013
-Expected mean: 0.250, variance: 0.016
----------------------------------------------------------------------------------
-Empirical data: {0.11956521739130435, 0.3705533596837945, 0.3601778656126482, 0.14970355731225296]
-```
-
----
-
-## Next Steps (as per challenge brief)
-
-- [x] Generalized n-layer Galton board circuit
-- [ ] Implement exponential distribution shaping
-- [ ] Simulate quantum Hadamard walk
-- [ ] Add noise model optimization
-- [ ] Compute Wasserstein / MSE distances under stochastic noise
-
----
-
-## Requirements
-
-Install dependencies with:
-
-```bash
-pip install -r requirements.txt
-```
-
-Recommended Python version: **3.10+**
-
----
-
-## References
-
-- [Quantum Galton Board Paper (PDF)](https://arxiv.org/pdf/2202.01735)
-- Qiskit Documentation: https://qiskit.org/documentation/
-- [Scipy binomial](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binom.html)
-
----
-
-## Acknowledgments
-
-Developed as part of the **Womanium Quantum Challenge 2025** under the Quantum Walks and Monte Carlo simulation track.
-
----
-
-## 🔗 License
-
-MIT License.
+Deck: slides/<final_presentation>.pdf (includes overlays + key metrics).
+How to run: python src/benchmark.py --target hadamard --steps 4 --shots 4096 --seeds 8 --out_dir results_fullgrid --save_json results_fullgrid/hadamard_n4.json
