@@ -1,24 +1,3 @@
-#!/usr/bin/env python3
-"""
-Full-grid benchmark.py
-
-- ALWAYS post-process to the *full* grid (length = raw bitstring length L).
-- Embed analytic targets onto that same grid with zeros between logical bins.
-- Parity offset (0 or 1) for embedding is picked by best match to the CLEAN run.
-
-Targets:
-  classical   -> binomial over n+1 bins
-  exponential -> discrete exp over n+1 bins
-  hadamard    -> n must be 4; fixed 5-bin analytic distribution
-
-Metrics (full-grid):
-  - TVD(noisy,clean)
-  - TVD(clean,target_full), TVD(noisy,target_full)
-  - KL(clean||target_full), KL(noisy||target_full)
-  - Hellinger(noisy,clean)
-  - Integrity (fraction of one-hot strings in noisy counts)
-"""
-
 import argparse, os, json
 import numpy as np
 import matplotlib.pyplot as plt
@@ -53,7 +32,6 @@ def onehot_integrity(counts_dict):
 
 # ---- full-grid post-processing (no compression) ----
 def onehot_counts_to_fullgrid(counts_dict, endianness='as_is'):
-    """Keep all L slots so off-support bins show leakage."""
     if not counts_dict:
         return np.array([]), np.array([])
     L = len(next(iter(counts_dict)))
@@ -86,7 +64,6 @@ def target_hadamard_n4_bins():
 
 # ---- embed bins onto full grid ----
 def embed_every_other(p_bins, L, offset):
-    """Place p_bins at indices offset, offset+2, ... (zeros elsewhere)."""
     t = np.zeros(L, dtype=float)
     idxs = offset + 2 * np.arange(len(p_bins))
     idxs = idxs[idxs < L]           # guard if L shorter than expected
@@ -94,7 +71,6 @@ def embed_every_other(p_bins, L, offset):
     return t, idxs
 
 def choose_offset_by_clean(p_bins, p_clean_full):
-    """Pick parity offset (0 or 1) that best matches CLEAN full-grid TVD."""
     L = len(p_clean_full)
     t0, idx0 = embed_every_other(p_bins, L, offset=0)
     t1, idx1 = embed_every_other(p_bins, L, offset=1)
@@ -103,14 +79,12 @@ def choose_offset_by_clean(p_bins, p_clean_full):
     return (t0, idx0, 0) if tvd0 <= tvd1 else (t1, idx1, 1)
 
 def leakage_mass(p_full, target_full):
-    """Probability mass in slots where target_full is zero."""
     mask = target_full == 0.0
     return float(np.sum(p_full[mask]))
 
 
 # ---------------- Noise model ----------------
 def build_synthetic_noise_model():
-    """Simple backend-agnostic noise model (tweak numbers if you like)."""
     # gate durations (s)
     t_sx, t_x, t_cx = 35e-9, 70e-9, 300e-9
     T1, T2 = 50e-6, 70e-6
