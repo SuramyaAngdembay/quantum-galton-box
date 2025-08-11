@@ -1,9 +1,9 @@
 Project: Quantum Galton Board as a Universal Statistical Simulator
 Team: Gorkhalis
-Members (WISER IDs): <Prajwal – gst-9ZHH1Kj14wFrIIO> · <Suramya – gst-wYBMQBj2KrRSykZ> · <Name – ID>
+Members (WISER IDs): <Prajwal – gst-9ZHH1Kj14wFrIIO> · <Suramya – gst-wYBMQBj2KrRSykZ> ·
 Program: WISER 2025 Quantum Projects
 
-Summary (≈500 words)
+Summary
 We implement a Quantum Galton Board (QGB) that maps a Galton box to a quantum circuit so a single circuit pass creates a superposition of all trajectories and samples a target distribution. This is a compact, intuitive playground for Monte-Carlo-style simulation on quantum hardware and a clean testbed for noise and mitigation in the NISQ era—relevant to transport, finance, and uncertainty quantification. (Project scope per brief: general n-layer circuit; additional targets—exponential and Hadamard; noisy simulations; and distance metrics.) Project details
 
 Objectives. (1) Generalize the QGB to n layers; (2) reproduce three targets—Hadamard walk, classical/binomial, and exponential; (3) build a robust benchmarking harness to compare noiseless vs. noisy runs with standardized post-processing and metrics (TVD, KL, Hellinger), plus leakage (mass off support) and integrity (fraction of one-hot strings).
